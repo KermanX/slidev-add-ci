@@ -5,7 +5,7 @@ cd(argv._[0])
 
 async function testRun(command) {
   console.log(`Running: ${command}`)
-  const p = $(command)
+  const p = $([command])
   for await (const chunk of p.stdout) {
     if (chunk.includes('err')) {
       console.error(`Error: ${chunk}`)
