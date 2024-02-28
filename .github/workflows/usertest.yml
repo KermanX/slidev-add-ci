@@ -89,7 +89,7 @@ jobs:
           pnpm export --per-slide
         working-directory: ../temp/slidev-project
 
-      - name: Install global
+      - name: Install globally
         run: ${{ matrix.pm }} i -g ${{ github.workspace }}/../temp/slidev-pkgs/cli.tgz playwright-chromium
         if: ${{ matrix.pm != 'yarn' }}
       
@@ -99,8 +99,8 @@ jobs:
 
       - name: Test build and export command in global mode
         run: |
-          slidev build
-          slidev export
-          slidev export --per-slide
+          slidev build slides.md
+          slidev export slides.md
+          slidev export slides.md --per-slide
         if: ${{ matrix.pm != 'yarn' }}
         working-directory: ../temp
