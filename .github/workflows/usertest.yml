@@ -64,14 +64,14 @@ jobs:
       - name: Install project (npm, pnpm)
         run: |
           ${{ matrix.pm }} i
-          ${{ matrix.pm }} i ../slidev-pkgs/cli
+          ${{ matrix.pm }} i ../slidev-pkgs/cli.tgz
         working-directory: ../temp/slidev-project
         if: ${{ matrix.pm != 'yarn' }}
 
       - name: Install project (yarn)
         run: |
           yarn
-          yarn add ../slidev-pkgs/cli
+          yarn add ../slidev-pkgs/cli.tgz
         working-directory: ../temp/slidev-project
         if: ${{ matrix.pm == 'yarn' }}
 
