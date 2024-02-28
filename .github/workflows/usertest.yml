@@ -75,5 +75,29 @@ jobs:
         working-directory: ../temp/slidev-project
         if: ${{ matrix.pm == 'yarn' }}
 
-      - name: Test run
-        run: node ./scripts/test-run.mjs ../temp/slidev-project
+      - name: Test build and export command in project
+        run: |
+          pnpm build
+          pnpm export
+          pnpm export --per-slide
+        working-directory: ../temp/slidev-project
+    
+      - name: Pnpm setup
+        run: pnpm setup
+        if: ${{ matrix.pm == 'pnpm' }}
+
+      - name: Install global
+        run: ${{ matrix.pm }} i -g ../temp/slidev-pkgs/cli.tgz playwright-chromium
+        if: ${{ matrix.pm != 'yarn' }}
+      
+      - name: Create slide file
+        run: pnpm --package=cpy-cli dlx cpy ./packages/slidev/template.md ../temp/slides.md
+        if: ${{ matrix.pm != 'yarn' }}
+
+      - name: Test build and export command in global mode
+        run: |
+          slidev build
+          slidev export
+          slidev export --per-slide
+        if: ${{ matrix.pm != 'yarn' }}
+        working-directory: ../temp
