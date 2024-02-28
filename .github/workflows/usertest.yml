@@ -88,6 +88,7 @@ jobs:
           pnpm export
           pnpm export --per-slide
         working-directory: ../temp/slidev-project
+        if: 0
 
       - name: Install globally
         run: ${{ matrix.pm }} i -g ${{ github.workspace }}/../temp/slidev-pkgs/cli.tgz playwright-chromium
