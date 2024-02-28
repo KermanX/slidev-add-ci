@@ -2,9 +2,8 @@ import { join } from "node:path"
 import process from "node:process"
 import { $, cd, fs } from "zx"
 
-const PKG_ROOT = '/temp/slidev-pkgs'
-
 const WORKSPACE_ROOT = process.cwd()
+const PKG_ROOT = join(WORKSPACE_ROOT, 'temp/slidev-pkgs')
 
 const packages = {
   'types': './packages/types',
