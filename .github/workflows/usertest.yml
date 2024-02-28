@@ -85,10 +85,9 @@ jobs:
       - name: Test build and export command in project
         run: |
           pnpm build
-          pnpm export
-          pnpm export --per-slide
+          pnpm export --timeout 300000
+          pnpm export --per-slide --timeout 300000
         working-directory: ../temp/slidev-project
-        if: 0
 
       - name: Install globally
         run: ${{ matrix.pm }} i -g ${{ github.workspace }}/../temp/slidev-pkgs/cli.tgz playwright-chromium
@@ -101,7 +100,7 @@ jobs:
       - name: Test build and export command in global mode
         run: |
           slidev build template.md
-          slidev export template.md
-          slidev export template.md --per-slide
+          slidev export template.md --timeout 300000
+          slidev export template.md --per-slide --timeout 300000
         if: ${{ matrix.pm != 'yarn' }}
         working-directory: ../temp
