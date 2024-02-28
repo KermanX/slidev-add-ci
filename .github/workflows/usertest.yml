@@ -95,13 +95,13 @@ jobs:
         if: ${{ matrix.pm != 'yarn' }}
       
       - name: Create slide file
-        run: pnpm --package=cpy-cli dlx cpy ./packages/slidev/template.md ../temp/slides.md
+        run: pnpm --package=cpy-cli dlx cpy ./packages/slidev/template.md ../temp/
         if: ${{ matrix.pm != 'yarn' }}
 
       - name: Test build and export command in global mode
         run: |
-          slidev build slides.md
-          slidev export slides.md
-          slidev export slides.md --per-slide
+          slidev build template.md
+          slidev export template.md
+          slidev export template.md --per-slide
         if: ${{ matrix.pm != 'yarn' }}
         working-directory: ../temp
