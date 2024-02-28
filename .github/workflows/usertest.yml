@@ -51,7 +51,7 @@ jobs:
         run: nr build
 
       - name: Pack
-        run: node ./scripts/pack.mjs ../temp/slidev-project
+        run: node ./scripts/pack.mjs ../temp/slidev-pkgs
 
       - name: Create new project
         run: echo "N" | pnpm create slidev ../temp/slidev-project
@@ -62,12 +62,16 @@ jobs:
         if: ${{ ! matrix.hoist }}
 
       - name: Install project (npm, pnpm)
-        run: ${{ matrix.pm }} i
+        run: |
+          ${{ matrix.pm }} i
+          ${{ matrix.pm }} i ../slidev-pkgs/cli
         working-directory: ../temp/slidev-project
         if: ${{ matrix.pm != 'yarn' }}
 
       - name: Install project (yarn)
-        run: yarn
+        run: |
+          yarn
+          yarn add ../slidev-pkgs/cli
         working-directory: ../temp/slidev-project
         if: ${{ matrix.pm == 'yarn' }}
 
