@@ -40,7 +40,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Setup
-        run: npm i -g @antfu/ni pnpm
+        run: |
+          npm i -g @antfu/ni pnpm
+          pnpm setup
 
       - name: Install
         run: nci
@@ -54,7 +56,9 @@ jobs:
         run: node ./scripts/pack.mjs ../temp/slidev-pkgs
 
       - name: Create new project
-        run: echo "N" | pnpm create slidev ../temp/slidev-project
+        run: |
+          pnpm i -g ../temp/slidev-pkgs/create-app
+          echo "N" | create-slidev-app ../temp/slidev-project
 
       - name: Remove npmrc
         run: pnpx del-cli ./.npmrc
@@ -81,10 +85,6 @@ jobs:
           pnpm export
           pnpm export --per-slide
         working-directory: ../temp/slidev-project
-    
-      - name: Pnpm setup
-        run: pnpm setup
-        if: ${{ matrix.pm == 'pnpm' }}
 
       - name: Install global
         run: ${{ matrix.pm }} i -g ../temp/slidev-pkgs/cli.tgz playwright-chromium

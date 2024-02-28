@@ -10,6 +10,7 @@ const packages = {
   'parser': './packages/parser',
   'cli': './packages/slidev',
   'client': './packages/client',
+  'create-app': './packages/create-app',
 }
 
 async function replaceDeps() {
