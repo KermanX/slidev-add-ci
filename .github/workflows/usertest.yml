@@ -20,11 +20,11 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [18.x]
         os: [ubuntu-latest, windows-latest, macos-latest]
         pm: [npm, pnpm]
         hoist: [true, false]
-      fail-fast: false
+      fail-fast: true
 
     steps:
       - name: Set git to use LF
@@ -55,22 +55,22 @@ jobs:
 
       - name: Create new project
         run: pnpx create slidev << N
-        working-directory: /temp/slidev-project
+        working-directory: ./temp/slidev-project
 
       - name: Remove npmrc
         run: pnpx del-cli ./.npmrc
-        working-directory: /temp/slidev-project
+        working-directory: ./temp/slidev-project
         if: ${{ ! matrix.hoist }}
 
       - name: Install project
         run: ${{ matrix.pm }} i
-        working-directory: /temp/slidev-project
+        working-directory: ./temp/slidev-project
         if: ${{ matrix.pm != 'yarn' }}
 
       - name: Install project (yarn)
         run: yarn
-        working-directory: /temp/slidev-project
+        working-directory: ./temp/slidev-project
         if: ${{ matrix.pm == 'yarn' }}
 
       - name: Test run
-        run: node ./scripts/test-run.mjs /temp/slidev-project
+        run: node ./scripts/test-run.mjs ./temp/slidev-project
