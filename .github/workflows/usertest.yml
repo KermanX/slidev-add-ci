@@ -51,25 +51,25 @@ jobs:
         run: nr build
 
       - name: Pack
-        run: node ./scripts/pack.mjs
+        run: node ./scripts/pack.mjs ../temp/slidev-project
 
       - name: Create new project
-        run: echo "N" | pnpm create slidev ./temp/slidev-project
+        run: echo "N" | pnpm create slidev ../temp/slidev-project
 
       - name: Remove npmrc
         run: pnpx del-cli ./.npmrc
-        working-directory: ./temp/slidev-project
+        working-directory: ../temp/slidev-project
         if: ${{ ! matrix.hoist }}
 
       - name: Install project (npm, pnpm)
         run: ${{ matrix.pm }} i
-        working-directory: ./temp/slidev-project
+        working-directory: ../temp/slidev-project
         if: ${{ matrix.pm != 'yarn' }}
 
       - name: Install project (yarn)
         run: yarn
-        working-directory: ./temp/slidev-project
+        working-directory: ../temp/slidev-project
         if: ${{ matrix.pm == 'yarn' }}
 
       - name: Test run
-        run: node ./scripts/test-run.mjs ./temp/slidev-project
+        run: node ./scripts/test-run.mjs ../temp/slidev-project
