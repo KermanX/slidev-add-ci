@@ -60,7 +60,7 @@ jobs:
 
       - name: Create new project
         run: |
-          pnpm i -g ../temp/slidev-pkgs/create-app
+          npm i -g ../temp/slidev-pkgs/create-app
           echo "N" | create-slidev ../temp/slidev-project
 
       - name: Remove npmrc
