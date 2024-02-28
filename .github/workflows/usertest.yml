@@ -42,15 +42,15 @@ jobs:
       - name: Setup
         run: npm i -g @antfu/ni pnpm
       
-      - name: Setup PNPM (Linux, macOS)
-        run: pnpm setup
-        shell: bash
-        if: ${{ matrix.os != 'windows-latest' }}
+      # - name: Setup PNPM (Linux, macOS)
+      #   run: pnpm setup
+      #   shell: bash
+      #   if: ${{ matrix.os != 'windows-latest' }}
       
-      - name: Setup PNPM (Windows)
-        run: pnpm setup
-        shell: pwsh
-        if: ${{ matrix.os == 'windows-latest' }}
+      # - name: Setup PNPM (Windows)
+      #   run: pnpm setup
+      #   shell: pwsh
+      #   if: ${{ matrix.os == 'windows-latest' }}
 
       - name: Install
         run: nci
